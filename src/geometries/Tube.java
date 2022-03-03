@@ -17,7 +17,7 @@ public class Tube implements Geometry{
 
     @Override
     // Returning a vector that is perpendicular to the surface of the tube.
-    public Vector getNormaL(Point point) {
+    public Vector getNormal(Point point) {
         return null;
     }
 

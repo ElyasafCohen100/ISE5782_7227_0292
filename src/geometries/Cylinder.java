@@ -20,9 +20,4 @@ public class Cylinder extends Tube implements Geometry {
         return height;
     }
 
-    @Override
-    // This is a method that returns the normal vector of the cylinder at a given point.
-    public Vector getNormaL(Point point) {
-        return super.getNormaL(point);
-    }
 }

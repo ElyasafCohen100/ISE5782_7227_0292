@@ -33,7 +33,7 @@ public class Plane implements Geometry {
     }
 
     /**
-     * Returns the normal vector of the plane
+     * getter for the normal vector of the plane
      *
      * @return The normal vector of the plane.
      */
@@ -41,11 +41,7 @@ public class Plane implements Geometry {
         return _normal;
     }
 
-    @Override
-    // A method that returns null.
-    public Vector getNormaL(Point point) {
-        return null;
-    }
+
 
     @Override
     public String toString() {
@@ -53,5 +49,15 @@ public class Plane implements Geometry {
                 "_q0=" + _q0 +
                 ", _normal=" + _normal +
                 '}';
+    }
+
+    /**
+     * overriding getNormal of Geometry
+     * @param point referred point to the normal
+     * @return normal to the Geometry
+     */
+    @Override
+    public Vector getNormal(Point point) {
+        return getNormal();
     }
 }

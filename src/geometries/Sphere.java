@@ -15,7 +15,7 @@ public class Sphere implements Geometry{
     }
 
     @Override
-    public Vector getNormaL(Point point) {
+    public Vector getNormal(Point point) {
         return null;
     }
 
