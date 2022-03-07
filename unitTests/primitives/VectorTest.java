@@ -1,5 +1,4 @@
 package primitives;
-
 import org.junit.jupiter.api.Test;
 
 import static java.lang.System.out;
@@ -8,21 +7,36 @@ import static primitives.Util.isZero;
 
 class VectorTest {
 
+    Vector v1 = new Vector(1, 2, 3);
+    Vector v2 = new Vector(-2, -4, -6);
+    Vector v3 = new Vector(0, 3, -2);
+
+    @Test
+    void testZero(){
+        assertThrows(IllegalArgumentException.class,()->
+                new Vector(0, 0, 0),"ERROR: zero vector does not throw an exception");
+    }
+
     @Test
     void testAdd() {
+        assertEquals(new Vector(1, 5, 1), v1.add(v3), "ERROR: add() function wrong value");
     }
 
     @Test
     void testScale() {
+        assertEquals(new Vector(2,4,6),v1.scale(2),"ERROR: scale()function wrong value");
     }
 
     @Test
     void testDotProduct() {
+        //---- boundary case ---//
+        assertTrue(isZero(v1.dotProduct(v3)),"ERROR: dotProduct() for orthogonal vectors is not zero");
+        //--- Equilibrium partition ----//
+        assertEquals(-28 ,v1.dotProduct(v2),"ERROR: dotProduct() wrong value");
     }
 
-    /**
-     * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
-     */
+    /*** Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}***/
+
     @Test
     void testCrossProduct() {
         Vector v1 = new Vector(1, 2, 3);
@@ -46,33 +60,31 @@ class VectorTest {
                 "crossProduct() for parallel vectors does not throw an exception");
     }
 
-
     @Test
     void testLengthSquared() {
-        Vector v1 = new Vector(1, 2, 3);
-        Vector v2 = new Vector(-2, -4, -6);
-        Vector v3 = new Vector(0, 3, -2);
-
         // test length..
-        assertEquals(14.0001, v1.lengthSquared(), 0.0001, "ERROR: lengthSquared() wrong value");
-
+        assertEquals(14, v1.lengthSquared(),"ERROR: lengthSquared() wrong value");
     }
 
     @Test
     void testLength() {
+        assertEquals(Math.sqrt(14),v1.length(),"ERROR: length() wrong value");
     }
 
     @Test
     void testNormalized() {
         Vector v = new Vector(0, 3, 4);
         Vector n = v.normalize();
+
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple test
         assertFalse(v == n, "normalized() changes the vector itself");
         assertEquals(1d, n.lengthSquared(), 0.00001, "wrong normalized vector length");
+
         assertThrows(IllegalArgumentException.class,
                 () -> v.crossProduct(n),
                 "normalized vector is not in the same direction");
+
         assertEquals(new Vector(0, 0.6, 0.8), n, "wrong normalized vector");
     }
 }

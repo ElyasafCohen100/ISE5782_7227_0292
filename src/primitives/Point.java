@@ -7,7 +7,6 @@ public class Point {
 
     final Double3 _xyz;
 
-
     // Creating a constructor that takes a Double3 object and creates a new Point object.
     public Point(Double3 xyz) {
         _xyz = xyz;
@@ -17,7 +16,6 @@ public class Point {
     public Point(double x, double y, double z) {
         _xyz = new Double3(x, y, z);
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -58,7 +56,7 @@ public class Point {
      * @return The distance between the two points.
      */
     double distance(Point point) {
-        return this.distanceSquared(point);
+        return Math.sqrt(distanceSquared(point));
     }
 
 
