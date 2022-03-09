@@ -48,7 +48,7 @@ public class Cylinder extends Tube implements Geometry {
         }
 
         //If the point on one of the cylinder's bases, but it's not the center point
-        double projection = cylinderCenterVector.dotProduct(point.subtract(centerOfSecondSide));
+        double projection = cylinderCenterVector.dotProduct(point.subtract(centerOfOneSide));
         if (projection == 0) {
             Vector v1 = point.subtract(centerOfOneSide);
             return v1.normalize();

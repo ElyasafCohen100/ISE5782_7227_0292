@@ -28,7 +28,7 @@ class CylinderTest {
 
         // =============== Boundary Values Tests ==================
         // TC10: check first center base normal (if p = o)
-        assertEquals(cylinder._axisRay.getDir(), cylinder.getNormal(new Point(0, 0, 0)),
+        assertEquals(cylinder._axisRay.getDir().scale(-1), cylinder.getNormal(new Point(0, 0, 0)),
                 "ERROR: The calculation of normal to the first base center of the cylinder is not calculated correctly"
         );
 
