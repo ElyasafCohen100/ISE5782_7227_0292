@@ -8,7 +8,7 @@ public class Vector extends Point {
         super(xyz);
 
         //Check if the coordinates create ZERO vector.
-        if(_xyz.equals(Double3.ZERO)){
+        if (_xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("ZERO vector not allowed");
         }
     }
@@ -30,13 +30,16 @@ public class Vector extends Point {
     public Vector add(Vector vector) {
         return new Vector(_xyz.add(vector._xyz));
     }
+
     /**
      * This function returns a new vector that is the result of multiplying the current vector by a scalar
      *
      * @param scalar the scalar to multiply the vector by
      * @return A new Vector object.
      */
-    public Vector scale(double scalar){return new Vector(_xyz.scale(scalar));}
+    public Vector scale(double scalar) {
+        return new Vector(_xyz.scale(scalar));
+    }
 
     // Calculating the dot product of the current vector and the vector passed as a parameter.
     public double dotProduct(Vector vector) {
@@ -64,7 +67,7 @@ public class Vector extends Point {
         double v2 = vector._xyz._d2;
         double v3 = vector._xyz._d3;
 
-        return new Vector((u2*v3-v2*u3),-(u1*v3-v1*u3),(u1*v2-v1*u2));
+        return new Vector((u2 * v3 - v2 * u3), -(u1 * v3 - v1 * u3), (u1 * v2 - v1 * u2));
     }
 
     // Calculating the length of the vector squared.

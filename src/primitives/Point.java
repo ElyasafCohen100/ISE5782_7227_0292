@@ -35,7 +35,6 @@ public class Point {
         return "Point " + _xyz;
     }
 
-
     // Calculating the distance between two points.
     public double distanceSquared(Point point) {
         double x1 = _xyz._d1;
@@ -58,7 +57,6 @@ public class Point {
     double distance(Point point) {
         return Math.sqrt(distanceSquared(point));
     }
-
 
     /**
      * Add a vector to a point

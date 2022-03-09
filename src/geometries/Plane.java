@@ -3,9 +3,8 @@ package geometries;
 import primitives.Point;
 import primitives.Vector;
 
-/**
- * A plane is a flat surface that extends infinitely in all directions
- */
+// Plane Class//
+//* A plane is a flat surface that extends infinitely in all directions**//
 public class Plane implements Geometry {
     final Point _q0;
     final Vector _normal;
@@ -42,7 +41,6 @@ public class Plane implements Geometry {
     }
 
 
-
     @Override
     public String toString() {
         return "Plane{" +
@@ -53,6 +51,7 @@ public class Plane implements Geometry {
 
     /**
      * overriding getNormal of Geometry
+     *
      * @param point referred point to the normal
      * @return normal to the Geometry
      */

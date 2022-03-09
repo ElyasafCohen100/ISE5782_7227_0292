@@ -1,9 +1,9 @@
-/********************************
- * the_authors:				    *
- * Elyasaf Cohen 311557227 	    *
- * 			&					*
- * Eliran Yizhakov 322400292 	*
- ********************************/
+/**************************************
+ * the_authors:				          *
+ * Elyasaf Cohen 311557227 	          *
+ * 			&					      *
+ * Eliran Yizhakov 322400292 	      *
+ **************************************/
 import primitives.*;
 
 import static java.lang.System.out;

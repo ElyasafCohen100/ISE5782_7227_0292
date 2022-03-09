@@ -1,6 +1,8 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Vector;
+
 //Create a class for representation a Triangle
 public class Triangle extends Polygon{
 
