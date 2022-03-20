@@ -2,6 +2,8 @@ package primitives;
 
 import java.util.Objects;
 
+import static primitives.Util.isZero;
+
 //Opening a Class for representation Ray
 public class Ray {
 
@@ -42,5 +44,18 @@ public class Ray {
                 "_p0=" + _p0 +
                 ", _dir=" + _dir +
                 '}';
+    }
+
+    /**
+     *get Point at specific distance in the ray's direction
+     *
+     * @param t is a distance for reaching new Point
+     * @return new {@link Point}
+     */
+    public Point getPoint(double t) {
+        if(isZero(t)){
+            throw new IllegalArgumentException("t is equal to 0 produce an illegal ZERO vector");
+        }
+        return _p0.add(_dir.scale(t));
     }
 }

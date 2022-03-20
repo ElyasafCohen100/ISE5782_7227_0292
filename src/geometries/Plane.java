@@ -1,7 +1,9 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Vector;
+import java.util.List;
+
+import primitives.*;
+import static primitives.Util.*;
 
 // Plane Class//
 //* A plane is a flat surface that extends infinitely in all directions**//
@@ -58,5 +60,42 @@ public class Plane implements Geometry {
     @Override
     public Vector getNormal(Point point) {
         return getNormal();
+    }
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+
+        Point P0= ray.getP0();
+        Vector v = ray.getDir();
+
+        if(_q0.equals(P0)){
+            return null;
+        }
+
+        Vector n = _normal;
+
+        double nv = n.dotProduct(v);
+
+        // ray is lying on the plane axis
+        if (isZero(nv)){
+            return null;
+        }
+
+        Vector Q0_P0 = _q0.subtract(P0);
+        double nP0Q0= alignZero(n.dotProduct(Q0_P0));
+
+        // t should be bigger than 0
+        if(isZero(nP0Q0)){
+            return null;
+        }
+
+        double t =alignZero(nP0Q0 / nv);
+
+        // t should be bigger than 0
+        if(t<=0){
+            return null;
+        }
+
+        return List.of(ray.getPoint(t));
     }
 }

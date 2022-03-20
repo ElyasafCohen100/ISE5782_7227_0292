@@ -14,6 +14,7 @@ class VectorTest {
 
     @Test
     void testZero() {
+        // =============== Boundary Values Tests ==================
         assertThrows(IllegalArgumentException.class, () ->
                 new Vector(0, 0, 0), "ERROR: zero vector does not throw an exception");
     }
