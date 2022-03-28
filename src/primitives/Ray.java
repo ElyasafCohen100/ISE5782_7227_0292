@@ -7,8 +7,8 @@ import static primitives.Util.isZero;
 //Opening a Class for representation Ray
 public class Ray {
 
-    final Point _p0;
-    final Vector _dir;
+    private final Point _p0;
+    private final Vector _dir;
 
     // Creating a constructor for the class Ray.
     public Ray(Point p0, Vector dir) {

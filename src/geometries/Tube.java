@@ -6,37 +6,13 @@ import primitives.Vector;
 
 import java.util.List;
 
-//Create a class for representation a tube
-public class Tube implements Geometry {
-
+public class Tube implements Geometry{
     protected Ray _axisRay;
     protected double _radius;
 
-    // Creating a constructor for the class Tube.
     public Tube(Ray axisRay, double radius) {
         _axisRay = axisRay;
         _radius = radius;
-    }
-
-    @Override
-    // Returning a vector that is perpendicular to the surface of the tube.
-    public Vector getNormal(Point point) {
-
-        Vector tubeCenterVector = _axisRay.getDir();
-        Point p0 = _axisRay.getP0();
-
-        double projection = tubeCenterVector.dotProduct(point.subtract(p0));
-        if (projection == 0) {
-            throw new IllegalArgumentException("the projection must not be 0");
-        }
-
-        // Calculating O when O is a point on direction tube vector (o = p0 + proj * v)//
-        Point tubeCenterPoint = p0.add(tubeCenterVector.scale(projection));
-
-        //Calculate the normal
-        Vector normalVector = point.subtract(tubeCenterPoint).normalize();
-
-        return normalVector;
     }
 
     @Override
@@ -45,6 +21,25 @@ public class Tube implements Geometry {
                 "_axisRay=" + _axisRay +
                 ", _radius=" + _radius +
                 '}';
+    }
+
+    @Override
+    public Vector getNormal(Point point) {
+        Vector centeredVectorDirection = _axisRay.getDir();
+        Point p0 = _axisRay.getP0();
+
+        //If the projection equals to zero.
+        double projection = centeredVectorDirection.dotProduct(point.subtract(p0));
+        if (projection == 0) throw new IllegalArgumentException("The projection not allowed to be 0");
+
+        //Calculate the point on the centered ray of the tube to calculate the normal with it.
+        Point center = p0.add(centeredVectorDirection.scale(projection));
+
+        //Calculate the normal
+        Vector v = point.subtract(center);
+
+        //Return the normalized normal
+        return v.normalize();
     }
 
     @Override

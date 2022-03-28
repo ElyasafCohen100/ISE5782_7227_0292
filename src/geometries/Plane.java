@@ -65,19 +65,19 @@ public class Plane implements Geometry {
     @Override
     public List<Point> findIntersections(Ray ray) {
 
-        Point P0= ray.getP0();
-        Vector v = ray.getDir();
+        Point P0= ray.getP0(); // according to the illustration P0 is the same point of the ray's P0 (that's why the definition))
+        Vector v = ray.getDir(); // according to the illustration v is the same vector of the ray's vector (that's why the definition))
 
         if(_q0.equals(P0)){
             return null;
         }
 
-        Vector n = _normal;
+        Vector n = _normal; // the normal to the plane
 
-        double nv = n.dotProduct(v);
+        double nv = n.dotProduct(v); // the denominator of the formula of t (t =(n*(Q-P0))/nv)
 
         // ray is lying on the plane axis
-        if (isZero(nv)){
+        if (isZero(nv)){ // can't divide by zero
             return null;
         }
 

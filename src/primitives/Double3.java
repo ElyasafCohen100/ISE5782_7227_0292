@@ -109,5 +109,4 @@ public class Double3 {
     Double3 product(Double3 rhs) {
         return new Double3(_d1 * rhs._d1, _d2 * rhs._d2, _d3 * rhs._d3);
     }
-
 }

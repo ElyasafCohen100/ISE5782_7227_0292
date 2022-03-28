@@ -9,7 +9,7 @@ import java.io.PipedOutputStream;
 //Creating a class to represent a cylinder
 public class Cylinder extends Tube implements Geometry {
 
-    private double _height;
+    private final double _height;
 
     // Creating a constructor for the class Cylinder.
     public Cylinder(Ray axisRay, double radius, double height) {
