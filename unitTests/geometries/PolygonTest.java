@@ -63,18 +63,27 @@ public class PolygonTest {
 
         // TC10: Vertex on a side of a quadrangular
         assertThrows(IllegalArgumentException.class, //
-                () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0.5, 0.5)),
-                "Constructed a polygon with vertix on a side");
+                () -> new Polygon(new Point(0, 0, 1),
+                        new Point(1, 0, 0),
+                        new Point(0, 1, 0),
+                        new Point(0, 0.5, 0.5)),
+                "Constructed a polygon with vertices on a side");
 
         // TC11: Last point = first point
         assertThrows(IllegalArgumentException.class, //
-                () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0, 1)),
-                "Constructed a polygon with vertice on a side");
+                () -> new Polygon(new Point(0, 0, 1),
+                        new Point(1, 0, 0),
+                        new Point(0, 1, 0),
+                        new Point(0, 0, 1)),
+                "Constructed a polygon with vertices on a side");
 
         // TC12: Co-located points
         assertThrows(IllegalArgumentException.class, //
-                () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 1, 0)),
-                "Constructed a polygon with vertice on a side");
+                () -> new Polygon(new Point(0, 0, 1),
+                        new Point(1, 0, 0),
+                        new Point(0, 1, 0),
+                        new Point(0, 1, 0)),
+                "Constructed a polygon with vertices on a side");
 
     }
 
@@ -89,8 +98,8 @@ public class PolygonTest {
                 new Point(0, 0, 1),
                 new Point(1, 0, 0),
                 new Point(0, 1, 0),
-
                 new Point(-1, 1, 1));
+
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals(new Vector(sqrt3, sqrt3, sqrt3),
                 pl.getNormal(new Point(0, 0, 1)), "Bad normal to triangle");

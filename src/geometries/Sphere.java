@@ -58,9 +58,10 @@ public class Sphere implements Geometry{
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        Point p0 = ray.getP0();
-        Point O = _center;
-        Vector V = ray.getDir();
+
+        Point p0 = ray.getP0(); // ray's starting point
+        Point O = _center; //the sphere's center point
+        Vector V = ray.getDir(); // "the v vector" from the presentation
 
         // if p0 on center, calculate with line parametric representation
         // the direction vector normalized.
@@ -95,7 +96,6 @@ public class Sphere implements Geometry{
             Point p2 = ray.getPoint(t2);
             return List.of(p2);
         }
-
         return null;
     }
 }

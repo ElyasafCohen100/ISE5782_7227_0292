@@ -14,15 +14,19 @@ class PlaneTest {
     @Test
     public void testConstructor()
     {
-        // =============== Boundary Values Tests ==================
+        // =============== Boundary Values Tests ==================//
         // TC10: Test if the first and second points coalesce.
         assertThrows(IllegalArgumentException.class, () -> {
-            Plane plane1 = new Plane(new Point(0, 0, 1), new Point(0, 0, 1), new Point(0, 1, 0));
+            Plane plane1 = new Plane(new Point(0, 0, 1),
+                           new Point(0, 0, 1),
+                           new Point(0, 1, 0));
         }, "The first and second points coalesce");
 
         // TC11: Test if the points are on the same line.
         assertThrows(IllegalArgumentException.class, () -> {
-            Plane plane2 = new Plane(new Point(1, 2, 1), new Point(1, 2, 2), new Point(1, 2, 3));
+            Plane plane2 = new Plane(new Point(1, 2, 1),
+                           new Point(1, 2, 2),
+                           new Point(1, 2, 3));
         }, "The points are on the same line");
     }
 
@@ -31,9 +35,11 @@ class PlaneTest {
      */
     @Test
     void getNormal() {
-        // ============ Equivalence Partitions Tests ==============
+        // ============ Equivalence Partitions Tests ==============//
+        Plane plane = new Plane(new Point(0, 0, 1),
+                      new Point(1, 0, 0),
+                      new Point(0, 1, 0));
 
-        Plane plane = new Plane(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
         double sqrt3 = Math.sqrt(1d / 3);
         assertTrue(plane.getNormal().equals(new Vector(sqrt3, sqrt3, sqrt3)) ||
                 plane.getNormal().scale(-1).equals(new Vector(sqrt3, sqrt3, sqrt3))||plane.getNormal().length()!=1, "Bad normal to plane");
@@ -53,7 +59,8 @@ class PlaneTest {
         assertNull(plane.findIntersections(new Ray(new Point(1,0.5,2), new Vector(1,2,5))),
                 "Ray does not intersect the plane");
 
-        // =============== Boundary Values Tests ==================
+
+        // ====================== Boundary Values Tests =======================//
         // **** Group: Ray is parallel to the plane
         //TC10: The ray included in the plane
         assertNull(plane.findIntersections(new Ray(new Point(1,2,1), new Vector(1,0,0))),

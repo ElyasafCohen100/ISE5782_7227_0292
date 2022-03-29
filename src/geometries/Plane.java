@@ -5,11 +5,15 @@ import java.util.List;
 import primitives.*;
 import static primitives.Util.*;
 
-// Plane Class//
-//* A plane is a flat surface that extends infinitely in all directions**//
+//======= Plane Class ========//
+
+/**
+ * A plane is a flat surface that extends infinitely in all directions
+ */
+
 public class Plane implements Geometry {
-    final Point _q0;
-    final Vector _normal;
+    final Point _q0; // a random point on the plane
+    final Vector _normal; // a normal vector to the plane
 
     // Creating a plane from a point and a vector.
     public Plane(Point q0, Vector vector) {
@@ -68,16 +72,16 @@ public class Plane implements Geometry {
         Point P0= ray.getP0(); // according to the illustration P0 is the same point of the ray's P0 (that's why the definition))
         Vector v = ray.getDir(); // according to the illustration v is the same vector of the ray's vector (that's why the definition))
 
-        if(_q0.equals(P0)){
-            return null;
+        if(_q0.equals(P0)){ // if the ray starting from the plane it doesn't cut the plane at all
+            return null; // so return null
         }
 
         Vector n = _normal; // the normal to the plane
 
-        double nv = n.dotProduct(v); // the denominator of the formula of t (t =(n*(Q-P0))/nv)
+        double nv = n.dotProduct(v); // the formula's denominator of "t" (t =(n*(Q-P0))/nv)
 
         // ray is lying on the plane axis
-        if (isZero(nv)){ // can't divide by zero
+        if (isZero(nv)){ // can't divide by zero (nv is the denominator)
             return null;
         }
 
