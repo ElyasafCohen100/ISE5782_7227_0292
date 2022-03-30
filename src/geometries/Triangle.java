@@ -16,7 +16,7 @@ public class Triangle extends Polygon implements Geometry{
     @Override
     public String toString() {
         return "Triangle{" +
-                "vertices=" + vertices.get(0) + ","+vertices.get(1) + ","+vertices.get(2)+
+                "vertices=" + this.vertices.get(0) + ","+ this.vertices.get(1) + ","+ this.vertices.get(2)+
                 '}';
     }
     @Override
@@ -26,13 +26,13 @@ public class Triangle extends Polygon implements Geometry{
         // we get a pyramid
 
         //Check if the ray intersect the plane.
-        if (_plane.findIntersections(ray) == null) {
+        if (this.plane.findIntersections(ray) == null) {
             return null;
         }
         // the three vectors from the same starting point
-        Vector v1 = vertices.get(0).subtract(ray.getP0());
-        Vector v2 = vertices.get(1).subtract(ray.getP0());
-        Vector v3 = vertices.get(2).subtract(ray.getP0());
+        Vector v1 = this.vertices.get(0).subtract(ray.getP0());
+        Vector v2 = this.vertices.get(1).subtract(ray.getP0());
+        Vector v3 = this.vertices.get(2).subtract(ray.getP0());
 
         // עושים מכפלה ווקטורית כדי לקבל נורמל על כל "פאה" של הפרמידה שנוצרה לי ומנרמלים
         //we want to get a normal for each pyramid's face so we do the crossProduct
@@ -48,7 +48,7 @@ public class Triangle extends Polygon implements Geometry{
         if ((alignZero(v.dotProduct(n1)) > 0 && alignZero(v.dotProduct(n2)) > 0 && alignZero(v.dotProduct(n3)) > 0) ||
                 (alignZero(v.dotProduct(n1)) < 0 && alignZero(v.dotProduct(n2)) < 0 && alignZero(v.dotProduct(n3)) < 0)){
 
-            return _plane.findIntersections(ray);
+            return this.plane.findIntersections(ray);
         }
         return null;
     }

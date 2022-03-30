@@ -5,16 +5,16 @@ import java.util.Objects;
 // Creating a new class for point representation
 public class Point {
 
-    final Double3 _xyz;
+    final Double3 xyz;
 
     // Creating a constructor that takes a Double3 object and creates a new Point object.
     public Point(Double3 xyz) {
-        _xyz = xyz;
+        this.xyz = xyz;
     }
 
     // Creating a constructor that takes three doubles and creates a new Point object.
     public Point(double x, double y, double z) {
-        _xyz = new Double3(x, y, z);
+        this.xyz = new Double3(x, y, z);
     }
 
     @Override
@@ -22,28 +22,28 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return _xyz.equals(point._xyz);
+        return this.xyz.equals(point.xyz);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_xyz);
+        return Objects.hash(this.xyz);
     }
 
     @Override
     public String toString() {
-        return "Point " + _xyz;
+        return "Point " + this.xyz;
     }
 
     // Calculating the distance between two points.
     public double distanceSquared(Point point) {
-        double x1 = _xyz._d1;
-        double y1 = _xyz._d2;
-        double z1 = _xyz._d3;
+        double x1 = this.xyz.d1;
+        double y1 = this.xyz.d2;
+        double z1 = this.xyz.d3;
 
-        double x2 = point._xyz._d1;
-        double y2 = point._xyz._d2;
-        double z2 = point._xyz._d3;
+        double x2 = point.xyz.d1;
+        double y2 = point.xyz.d2;
+        double z2 = point.xyz.d3;
 
         return ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) + (z2 - z1) * (z2 - z1));
     }
@@ -65,14 +65,14 @@ public class Point {
      * @return A new Point object.
      */
     public Point add(Vector vector) {
-        return new Point(_xyz.add(vector._xyz));
+        return new Point(this.xyz.add(vector.xyz));
     }
 
 
     // Subtracting the point from the vector.
     public Vector subtract(Point point) {
 
-        Double3 result = _xyz.subtract(point._xyz);
+        Double3 result = this.xyz.subtract(point.xyz);
 
         if (result.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("ZERO vector not allowed");
@@ -81,12 +81,12 @@ public class Point {
     }
 
     public double getX() {
-        return _xyz._d1;
+        return this.xyz.d1;
     }
     public double getY() {
-        return _xyz._d2;
+        return this.xyz.d2;
     }
     public double getZ() {
-        return _xyz._d3;
+        return this.xyz.d3;
     }
 }

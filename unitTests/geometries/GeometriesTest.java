@@ -44,6 +44,5 @@ class GeometriesTest {
         Ray rayAllObjectIntersect = new Ray(new Point(1, 2.5, 1), new Vector(0, -1, 0));
         assertEquals(4, geometries.findIntersections(rayAllObjectIntersect).size(),
                 "Suppose to be 4 intersection points");
-
     }
 }

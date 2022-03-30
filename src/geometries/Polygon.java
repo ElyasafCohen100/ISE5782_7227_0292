@@ -19,7 +19,7 @@ public class Polygon implements Geometry {
     /**
      * Associated plane in which the polygon lays
      */
-    protected Plane _plane;
+    protected Plane plane;
     private int _size;
 
     /**
@@ -50,11 +50,11 @@ public class Polygon implements Geometry {
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
-        _plane = new Plane(vertices[0], vertices[1], vertices[2]);
+       this.plane = new Plane(vertices[0], vertices[1], vertices[2]);
         if (vertices.length == 3)
             return; // no need for more tests for a Triangle
 
-        Vector n = _plane.getNormal();
+        Vector n = this.plane.getNormal();
 
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
@@ -86,7 +86,7 @@ public class Polygon implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        return _plane.getNormal(point);
+        return this.plane.getNormal(point);
     }
 
     @Override

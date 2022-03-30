@@ -7,26 +7,26 @@ import primitives.Vector;
 import java.util.List;
 
 public class Tube implements Geometry{
-    protected Ray _axisRay;
-    protected double _radius;
+    protected Ray axisRay;
+    protected double radius;
 
     public Tube(Ray axisRay, double radius) {
-        _axisRay = axisRay;
-        _radius = radius;
+        this.axisRay = axisRay;
+        this.radius = radius;
     }
 
     @Override
     public String toString() {
         return "Tube{" +
-                "_axisRay=" + _axisRay +
-                ", _radius=" + _radius +
+                "axisRay=" + this.axisRay +
+                ", radius=" + this.radius +
                 '}';
     }
 
     @Override
     public Vector getNormal(Point point) {
-        Vector centeredVectorDirection = _axisRay.getDir();
-        Point p0 = _axisRay.getP0();
+        Vector centeredVectorDirection = this.axisRay.getDir();
+        Point p0 = this.axisRay.getP0();
 
         //If the projection equals to zero.
         double projection = centeredVectorDirection.dotProduct(point.subtract(p0));

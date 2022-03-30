@@ -11,14 +11,14 @@ import static primitives.Util.isZero;
  */
 public class Camera {
 
-    private Point _p0;
-    private Vector _vTo;
-    private Vector _vUp;
-    private Vector _vRight;
-    private double _distance;
+    private Point p0;
+    private Vector vTo;
+    private Vector vUp;
+    private Vector vRight;
+    private double distance;
 
-    private double _width;
-    private double _height;
+    private double width;
+    private double height;
 
     /**
      * constructor to initialize camera
@@ -34,23 +34,23 @@ public class Camera {
             throw new IllegalArgumentException("vTo and vUp are not orthogonal");
         }
 
-        _p0=p0;
-        _vTo =vTo.normalize();
-        _vUp =vUp.normalize();
-        _vRight =vTo.crossProduct(vUp);
+        this.p0 =p0;
+        this.vTo =vTo.normalize();
+        this.vUp =vUp.normalize();
+        this.vRight =vTo.crossProduct(vUp);
     }
 
-    public Point getP0() { return _p0; }
+    public Point getP0() { return this.p0; }
 
-    public Vector getvT0() { return _vTo;}
+    public Vector getvT0() { return this.vTo;}
 
-    public Vector getvUp() { return _vUp;}
+    public Vector getvUp() { return this.vUp;}
 
-    public Vector getvRight() { return _vRight; }
+    public Vector getvRight() { return this.vRight; }
 
-    public double getWidth() { return _width;}
+    public double getWidth() { return this.width;}
 
-    public double getHeight() {return _height;}
+    public double getHeight() {return this.height;}
 
     //Chaining methods.
 
@@ -60,7 +60,7 @@ public class Camera {
      * @return The camara distance
      */
     public Camera setVPDistance(double distance) {
-        _distance = distance;
+        this.distance = distance;
         return this;
     }
 
@@ -71,8 +71,8 @@ public class Camera {
      * @return The view plane size
      */
     public Camera setVPSize(double width, double height) {
-        _width = width;
-        _height =height;
+        this.width = width;
+        this.height =height;
         return this;
     }
 
@@ -88,22 +88,22 @@ public class Camera {
      */
     public Ray constructRay(int Nx, int Ny, int j, int i) {
         // Ratio (pixel width & height)//
-        double Ry= (double) _height /Ny;
-        double Rx = (double) _width /Nx;
+        double Ry= (double) this.height /Ny;
+        double Rx = (double) this.width /Nx;
 
         //image center//
-        Point Pc = _p0.add(_vTo.scale(_distance));
+        Point Pc = this.p0.add(this.vTo.scale(this.distance));
         Point Pij =Pc;
         double Yi = - (i-((Ny - 1)/2d))* Ry;
         double Xj = (j-((Nx - 1)/2d))* Rx;
 
         //move to middle of pixel i,j
         if (!isZero(Xj)) { // vRight need to be scaled with xj, so it cannot be zero
-            Pij = Pij.add(_vRight.scale(Xj));
+            Pij = Pij.add(this.vRight.scale(Xj));
         }
         if (!isZero(Yi)) {// vUp need to be scaled with yi, so it cannot be zero
-            Pij = Pij.add(_vUp.scale(Yi));
+            Pij = Pij.add(this.vUp.scale(Yi));
         }
-        return new Ray(_p0, Pij.subtract(_p0));
+        return new Ray(this.p0, Pij.subtract(this.p0));
     }
 }

@@ -4,39 +4,37 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.io.PipedOutputStream;
-
 //Creating a class to represent a cylinder
 public class Cylinder extends Tube implements Geometry {
 
-    private final double _height;
+    private final double height;
 
     // Creating a constructor for the class Cylinder.
     public Cylinder(Ray axisRay, double radius, double height) {
         super(axisRay, radius);
-        _height = height;
+        this.height = height;
     }
 
     public double getHeight() {
-        return _height;
+        return this.height;
     }
 
     @Override
     public String toString() {
         return "Cylinder{" +
-                "height=" + _height +
-                ", _axisRay=" + _axisRay +
-                ", _radius=" + _radius +
+                "height=" + height +
+                ",axisRay=" + axisRay +
+                ",radius=" + radius +
                 '}';
     }
 
     public Vector getNormal(Point point) {
 
         // define the center of cylinder's sides
-        Vector cylinderCenterVector = _axisRay.getDir();
+        Vector cylinderCenterVector = axisRay.getDir();
 
-        Point centerOfOneSide = _axisRay.getP0();
-        Point centerOfSecondSide = _axisRay.getP0().add(_axisRay.getDir().scale(_height));
+        Point centerOfOneSide = axisRay.getP0();
+        Point centerOfSecondSide = axisRay.getP0().add(axisRay.getDir().scale(this.height));
 
         //The normal at a base will be simply equal to central ray's
         //direction vector 𝑣 or opposite to it (−𝑣) so we check it

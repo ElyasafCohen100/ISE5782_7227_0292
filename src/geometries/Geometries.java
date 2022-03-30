@@ -11,25 +11,25 @@ import java.util.List;
  * Composite class for all geometries object implementing {@link Intersectable}
  */
 public class Geometries implements Intersectable {
-    List<Intersectable> _intersectables;
+    List<Intersectable> intersectables;
 
     public Geometries() {
-        _intersectables = new LinkedList<Intersectable>();
+        intersectables = new LinkedList<Intersectable>();
     }
 
     public Geometries(Intersectable...intersectables) {
-        _intersectables = new LinkedList<Intersectable>();
-        Collections.addAll(_intersectables,intersectables);
+        this.intersectables = new LinkedList<Intersectable>();
+        Collections.addAll(this.intersectables,intersectables);
     }
 
     public void add(Intersectable... intersectables){
-        Collections.addAll(_intersectables,intersectables);
+        Collections.addAll(this.intersectables,intersectables);
     }
 
     @Override
     public List<Point> findIntersections(Ray ray) {
         LinkedList<Point> points=null; // החזקת נקודות חיתוך עם כל אחתד מהקאומטרים
-        for(var geometry: _intersectables){
+        for(var geometry: intersectables){
             var geometryList=geometry.findIntersections(ray);
             if(geometryList!=null){
                 if(points==null){
