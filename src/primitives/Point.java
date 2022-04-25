@@ -5,6 +5,7 @@ import java.util.Objects;
 // Creating a new class for point representation
 public class Point {
 
+    public static final Point ZERO = new Point(0,0,0);
     final Double3 xyz;
 
     // Creating a constructor that takes a Double3 object and creates a new Point object.
