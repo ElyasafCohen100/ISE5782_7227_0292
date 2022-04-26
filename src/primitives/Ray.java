@@ -1,10 +1,11 @@
 package primitives;
 
+import java.util.List;
 import java.util.Objects;
 
 import static primitives.Util.isZero;
 
-//Opening a Class for representation Ray
+//Opening a Class for representation Ray in the space (3D)//
 public class Ray {
 
     private final Point p0;
@@ -47,15 +48,32 @@ public class Ray {
     }
 
     /**
-     *get Point at specific distance in the ray's direction
+     * get Point at specific distance in the ray's direction
      *
      * @param t is a distance for reaching new Point
      * @return new {@link Point}
      */
     public Point getPoint(double t) {
-        if(isZero(t)){
+        if (isZero(t)) {
             throw new IllegalArgumentException("t is equal to 0 produce an illegal ZERO vector");
         }
         return this.p0.add(this.dir.scale(t));
+    }
+
+    public Point findClosestPoint(List<Point> pointList) {
+        Point closestPoint = null;
+        double minDistance = Double.MAX_VALUE;
+        double pointDistance; // the distance between the "this.p0" to each point in the list
+
+        if (!pointList.isEmpty()) {
+            for (var pointInList : pointList) {
+                pointDistance = this.p0.distance(pointInList);
+                if (pointDistance < minDistance) {
+                    minDistance = pointDistance;
+                    closestPoint = pointInList;
+                }
+            }
+        }
+        return closestPoint;
     }
 }

@@ -1,30 +1,27 @@
 package scene;
 
-import elements.AmbientLight;
+import lighting.AmbientLight;
 import geometries.Geometries;
 import primitives.Color;
 
-
-//================== Scene class ==================//
+//================== Scene class (PDS - Plain Data Structure) ==================//
 public class Scene {
 
-    private final String name;
-    private final Color background;
-    private final AmbientLight ambientLiget;
-    private final Geometries geometries;
+    //==== we use with design pattern called "builder pattern" ====//
+    private final String name; // the scene's name
+    private final Color background; // the background's color (black is the default)
+    private final AmbientLight ambientLight; //the ambientLight - תאורה סביבתית
+    private final Geometries geometries; // the 3D model
 
     public String getName() {
         return name;
     }
-
     public Color getBackground() {
         return background;
     }
-
-    public AmbientLight getAmbientLiget() {
-        return ambientLiget;
+    public AmbientLight getAmbientLight() {
+        return ambientLight;
     }
-
     public Geometries getGeometries() {
         return geometries;
     }
@@ -32,7 +29,7 @@ public class Scene {
     private Scene(SceneBuilder builder) {
         this.name = builder.name;
         this.background = builder.background;
-        this.ambientLiget = builder.ambientLight;
+        this.ambientLight = builder.ambientLight;
         this.geometries = builder.geometries;
     }
 
@@ -47,7 +44,7 @@ public class Scene {
             this.name = name;
         }
 
-        //====== chaining (שירשור) method ======//
+        //========= chaining (שירשור) method =========//
 
         public SceneBuilder setBackground(Color background) {
             this.background = background;
@@ -64,8 +61,6 @@ public class Scene {
             return this;
         }
 
-        public Scene build(){
-            return new Scene(this);
-        }
+        public Scene build(){return new Scene(this);}
     }
 }

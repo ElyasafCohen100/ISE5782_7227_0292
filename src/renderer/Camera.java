@@ -23,6 +23,7 @@ public class Camera {
     //=== the view plane size ===//
     private double width;
     private double height;
+
     private ImageWriter imageWriter;
     private RayTracer rayTracer;
 
@@ -123,7 +124,26 @@ public class Camera {
     }
 
     public void renderImage() {
-        //TBD//
+        if (this.imageWriter == null)
+            throw new UnsupportedOperationException("Missing imageWriter");
+        if (this.rayTracer == null)
+            throw new UnsupportedOperationException("Missing rayTracerBase");
+
+        for (int i = 0; i < this.imageWriter.getNy(); i++) {
+            for (int j = 0; j < this.imageWriter.getNy(); j++) {
+                Color color = castRay(j,i);
+                this.imageWriter.writePixel(j, i, color);
+            }
+        }
+    }
+
+    private Color castRay(int j,int i){
+        Ray ray = constructRay(
+                this.imageWriter.getNx(),
+                this.imageWriter.getNy(),
+                j,
+                i);
+        return this.rayTracer.traceRay(ray);
     }
 
     public void writeToImage() {
@@ -136,7 +156,7 @@ public class Camera {
         for (int i = 0; i < imageWriter.getNx(); i++) {
             for (int j = 0; j < imageWriter.getNy(); j++) {
                 //=== create the net ===//
-                if (i % 50 == 0 || j % 50 == 0) {
+                if (i % interval == 0 || j % interval == 0) {
                     imageWriter.writePixel(i, j, color);
                 }
             }
