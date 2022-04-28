@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scene background-color="75 127 190">
+	<ambient-light color="255 191 191" />
+	<geometries>
+		<sphere center="0 0 -100" radius="50" />
+
+		<triangle p0="-100 0 -100" p1="0 100 -100" p2="-100 100 -100" />
+		<triangle p0="-100 0 -100" p1="0 -100 -100" p2="-100 -100 -100" />
+		<triangle p0="100 0 -100" p1="0 -100 -100" p2="100 -100 -100" />
+	</geometries>
+</scene>

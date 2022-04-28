@@ -137,20 +137,6 @@ public class Camera {
         }
     }
 
-    private Color castRay(int j,int i){
-        Ray ray = constructRay(
-                this.imageWriter.getNx(),
-                this.imageWriter.getNy(),
-                j,
-                i);
-        return this.rayTracer.traceRay(ray);
-    }
-
-    public void writeToImage() {
-        this.imageWriter.writeToImage();
-
-    }
-
     public void printGrid(int interval, Color color) {
         //=== running on the view plane===//
         for (int i = 0; i < imageWriter.getNx(); i++) {
@@ -161,5 +147,18 @@ public class Camera {
                 }
             }
         }
+    }
+
+    public void writeToImage() {
+        this.imageWriter.writeToImage();
+    }
+
+    private Color castRay(int j,int i){
+        Ray ray = constructRay(
+                this.imageWriter.getNx(),
+                this.imageWriter.getNy(),
+                j,
+                i);
+        return this.rayTracer.traceRay(ray);
     }
 }
