@@ -5,7 +5,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 //Creating a class to represent a cylinder
-public class Cylinder extends Tube implements Geometry {
+public class Cylinder extends Tube, Geometry {
 
     private final double height;
 

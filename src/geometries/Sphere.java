@@ -7,7 +7,7 @@ import primitives.Vector;
 import java.util.List;
 import java.util.Objects;
 
-public class Sphere implements Geometry{
+public class Sphere extends Geometry {
     private final Point center;
     private final double radius;
 

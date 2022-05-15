@@ -12,11 +12,11 @@ import primitives.Vector;
  * so here we have left the "getNormal" function to find the Normal of any geometry shape
  */
 
-public interface Geometry extends Intersectable {
+public abstract class Geometry implements Intersectable {
     /**
      * return the normal to the vector in specific point
      * @param point
      * @return  the normal to the vector in specific point
      */
-    Vector getNormal(Point point);
+    public abstract Vector getNormal(Point point);
 }
