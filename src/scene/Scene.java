@@ -16,12 +16,15 @@ public class Scene {
     public String getName() {
         return name;
     }
+
     public Color getBackground() {
         return background;
     }
+
     public AmbientLight getAmbientLight() {
         return ambientLight;
     }
+
     public Geometries getGeometries() {
         return geometries;
     }

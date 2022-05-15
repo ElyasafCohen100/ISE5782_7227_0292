@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
@@ -12,7 +13,28 @@ import primitives.Vector;
  * so here we have left the "getNormal" function to find the Normal of any geometry shape
  */
 
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
+
+    protected Color emission = Color.BLACK; // the geometry's default color
+
+    /**
+     * getEmission function
+     * @return the geometry's color
+     */
+    public Color getEmission() {
+        return this.emission;
+    }
+
+    /**
+     * setEmission function
+     * @param emission
+     * @return
+     */
+    public Geometry setEmission(Color emission) {
+        this.emission = emission;
+        return this;
+    }
+
     /**
      * return the normal to the vector in specific point
      * @param point

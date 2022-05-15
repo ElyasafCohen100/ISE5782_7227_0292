@@ -14,27 +14,33 @@ import java.util.Objects;
  * We define here only the "findIntersection" function to find intersection points between the ray
  * and the complex object
  */
-public interface Intersectable {
+public abstract class Intersectable {
     /*
      * @param ray {@link Ray} pointing toward the object
      * @return list of intersection Point between the ray and the object
      */
-    List<Point> findIntersections(Ray ray);
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+    public abstract List<Point> findIntersections(Ray ray);
+
+    //======== the NVI design pattern =======//
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersectionsHelper(ray);
+    }
 
     /**
      * this class has been written because we want to know the specific geometry the ray cross it over
      * because we added the emission light for each geometry and if we want to calculate the color at the point
-     * we have to mind the geometry's color
+     * we have to mind the geometry's color (this class is PDS)
      */
     public static class GeoPoint {
         public final Geometry geometry;
         public final Point point;
 
         //--- constructor ---//
-        public GeoPoint(Geometry geometry, Point point){
-            this.geometry=geometry;
-            this.point=point;
+        public GeoPoint(Geometry geometry, Point point) {
+            this.geometry = geometry;
+            this.point = point;
         }
 
         @Override
@@ -42,7 +48,7 @@ public interface Intersectable {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             GeoPoint geoPoint = (GeoPoint) o;
-            return geometry.equals(geoPoint.geometry) && point.equals(geoPoint.point);
+            return Objects.equals(geometry, geoPoint.geometry) && point.equals(geoPoint.point);
         }
 
         @Override
