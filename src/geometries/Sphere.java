@@ -57,8 +57,7 @@ public class Sphere extends Geometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point p0 = ray.getP0(); // ray's starting point
         Point O = this.center; //the sphere's center point
         Vector V = ray.getDir(); // "the v vector" from the presentation
@@ -67,7 +66,7 @@ public class Sphere extends Geometry {
         // the direction vector normalized.
         if (O.equals(p0)) {
             Point newPoint = p0.add(ray.getDir().scale(this.radius));
-            return List.of(newPoint);
+            return List.of(new GeoPoint(this,newPoint));
         }
 
         Vector U = O.subtract(p0);
@@ -84,17 +83,17 @@ public class Sphere extends Geometry {
         if (t1 > 0 && t2 > 0) {
             Point p1 = ray.getPoint(t1);
             Point p2 = ray.getPoint(t2);
-            return List.of(p1, p2);
+            return List.of(new GeoPoint(this,p1),new GeoPoint(this,p2));
         }
 
         if (t1 > 0) {
             Point p1 = ray.getPoint(t1);
-            return List.of(p1);
+            return List.of(new GeoPoint(this,p1));
         }
 
         if (t2 > 0) {
             Point p2 = ray.getPoint(t2);
-            return List.of(p2);
+            return List.of(new GeoPoint(this,p2));
         }
         return null;
     }

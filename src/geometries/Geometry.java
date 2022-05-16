@@ -4,18 +4,26 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
+import java.util.Objects;
+
 /**
- * interface for finding the Normal of any geometry shape
+ * an abstract class for finding     the Normal of any geometry shape
  *
  * As we said - because there is no necessary to implement the "getNormal" function in a complex object,
- * we separated the Geometry interface into two interfaces(ISP principle).
+ * we separated the Geometry interface (Targil 5) into two interfaces(ISP principle).
+ *(from Targil 6 on, it's becomes to be an abstract class)
  *
  * so here we have left the "getNormal" function to find the Normal of any geometry shape
  */
 
 public abstract class Geometry extends Intersectable {
 
-    protected Color emission = Color.BLACK; // the geometry's default color
+    @Override
+    public int hashCode() {
+        return Objects.hash(emission);
+    }
+
+    private Color emission = Color.BLACK; // the geometry's default color
 
     /**
      * getEmission function

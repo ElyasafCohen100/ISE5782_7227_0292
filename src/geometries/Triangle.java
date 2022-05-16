@@ -5,10 +5,18 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import static primitives.Util.isZero;
 import static primitives.Util.alignZero;
 
-public class Triangle extends Polygon, Geometry {
+public class Triangle extends Polygon {
 
+    /**
+     * Constructor to initialize triangle
+     * @param p1 first point
+     * @param p2 second point
+     * @param p3 third point
+     */
     public Triangle(Point p1, Point p2, Point p3) {
         super(p1,p2,p3);
     }
@@ -19,14 +27,15 @@ public class Triangle extends Polygon, Geometry {
                 "vertices=" + this.vertices.get(0) + ","+ this.vertices.get(1) + ","+ this.vertices.get(2)+
                 '}';
     }
+
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 
         // we take three vectors from the same starting point and connect them to the triangle's vertices
         // we get a pyramid
 
         //Check if the ray intersect the plane.
-        if (this.plane.findIntersections(ray) == null) {
+        if (this.plane.findGeoIntersectionsHelper(ray) == null) {
             return null;
         }
         // the three vectors from the same starting point
@@ -48,7 +57,7 @@ public class Triangle extends Polygon, Geometry {
         if ((alignZero(v.dotProduct(n1)) > 0 && alignZero(v.dotProduct(n2)) > 0 && alignZero(v.dotProduct(n3)) > 0) ||
                 (alignZero(v.dotProduct(n1)) < 0 && alignZero(v.dotProduct(n2)) < 0 && alignZero(v.dotProduct(n3)) < 0)){
 
-            return this.plane.findIntersections(ray);
+            return this.plane.findGeoIntersectionsHelper(ray);
         }
         return null;
     }

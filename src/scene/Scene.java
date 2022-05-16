@@ -1,7 +1,7 @@
 package scene;
 
-import lighting.AmbientLight;
 import geometries.Geometries;
+import lighting.AmbientLight;
 import primitives.Color;
 
 //================== Scene class (PDS - Plain Data Structure) ==================//
@@ -26,6 +26,7 @@ public class Scene {
     }
 
     public Geometries getGeometries() {
+        if(geometries==null) return  new Geometries();
         return geometries;
     }
 

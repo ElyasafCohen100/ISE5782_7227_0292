@@ -15,14 +15,22 @@ public class Plane extends Geometry {
     final Point q0; // a random point on the plane
     final Vector normal; // a normal vector to the plane
 
-    // Creating a plane from a point and a vector.
+    /**
+     * Constructor to initialize plane
+     * @param q0 point in the plane
+     * @param vector vector that orthogonal to the plain
+     */
     public Plane(Point q0, Vector vector) {
         this.q0 = q0;
         this.normal = vector.normalize();
     }
 
-    // Creating a pl
-    // ane from three points.
+    /**
+     * Constructor to initialize plane
+     * @param p1 one point in the plane
+     * @param p2 second point in the plane
+     * @param p3 third point in the plane
+     */
     public Plane(Point p1, Point p2, Point p3) {
 
         this.q0 = p1;
@@ -65,43 +73,6 @@ public class Plane extends Geometry {
     @Override
     public Vector getNormal(Point point) {
         return getNormal();
-    }
-
-    @Override
-    public List<Point> findIntersections(Ray ray) {
-
-        Point P0= ray.getP0(); // according to the illustration P0 is the same point of the ray's P0 (that's why the definition))
-        Vector v = ray.getDir(); // according to the illustration v is the same vector of the ray's vector (that's why the definition))
-
-        if(this.q0.equals(P0)){ // if the ray starting from the plane it doesn't cut the plane at all
-            return null; // so return null
-        }
-
-        Vector n = this.normal; // the normal to the plane
-
-        double nv = n.dotProduct(v); // the formula's denominator of "t" (t =(n*(Q-P0))/nv)
-
-        // ray is lying on the plane axis
-        if (isZero(nv)){ // can't divide by zero (nv is the denominator)
-            return null;
-        }
-
-        Vector Q0_P0 = this.q0.subtract(P0);
-        double nP0Q0= alignZero(n.dotProduct(Q0_P0));
-
-        // t should be bigger than 0
-        if(isZero(nP0Q0)){
-            return null;
-        }
-
-        double t =alignZero(nP0Q0 / nv);
-
-        // t should be bigger than 0
-        if(t<=0){
-            return null;
-        }
-
-        return List.of(ray.getPoint(t));
     }
 
     @Override

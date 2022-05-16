@@ -55,7 +55,7 @@ public class Point {
      * @param point The point to measure the distance to.
      * @return The distance between the two points.
      */
-    double distance(Point point) {
+    public double distance(Point point) {
         return Math.sqrt(distanceSquared(point));
     }
 

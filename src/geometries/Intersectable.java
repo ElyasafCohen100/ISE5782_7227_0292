@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * interface for finding the intersection point between the ray and the complex object
- * <p>
+ * an abstract class for finding the intersection point between the ray and the complex object
+ *
  * As we said - because there is no necessary to implement the "getNormal" function in a complex object,
- * we separated the Geometry interface into two interfaces (ISP principle), and this is one of them.
- * <p>
+ * we separated the Geometry interface (Targil 5) into two interfaces (ISP principle), and this is one of them.
+ * (from Targil 6 on, it's becomes to be an abstract class)
+ *
  * We define here only the "findIntersection" function to find intersection points between the ray
  * and the complex object
  */
@@ -19,7 +20,12 @@ public abstract class Intersectable {
      * @param ray {@link Ray} pointing toward the object
      * @return list of intersection Point between the ray and the object
      */
-    public abstract List<Point> findIntersections(Ray ray);
+    public final List<Point> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null
+                : geoList.stream().map(gp -> gp.point).toList();
+    }
+
 
     //======== the NVI design pattern =======//
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
