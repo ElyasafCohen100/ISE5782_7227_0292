@@ -17,7 +17,7 @@ class ImageWriterTest {
 
     @Test
     void testWriteToImage() {
-        ImageWriter imageWriter = new ImageWriter("yellowsbumarine", nX, nY);
+        ImageWriter imageWriter = new ImageWriter("testYellow", nX, nY);
         //=== running on the view plane===//
         for (int i = 0; i < nX; i++) {
             for (int j = 0; j < nY; j++) {

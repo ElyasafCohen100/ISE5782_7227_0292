@@ -1,17 +1,14 @@
 package renderer;
 
 import geometries.Intersectable.GeoPoint;
-import primitives.Color;
-import primitives.Double3;
-import primitives.Ray;
-import primitives.Vector;
+import lighting.LightSource;
+import primitives.*;
 import scene.Scene;
 
 import java.util.List;
-
 import static primitives.Util.alignZero;
 
-public class RayTracerBasic extends RayTracer{
+public class RayTracerBasic extends RayTracer {
 
     private static final double DELTA = 0.1;
 
@@ -21,6 +18,7 @@ public class RayTracerBasic extends RayTracer{
 
     /**
      * Get color of the intersection of the ray with the scene
+     *
      * @param ray Ray to trace
      * @return Color of intersection
      */
@@ -29,8 +27,9 @@ public class RayTracerBasic extends RayTracer{
 
         List<GeoPoint> intersections = this.scene.getGeometries().findGeoIntersections(ray);
 
-        if (intersections == null)
+        if (intersections == null) {
             return this.scene.getBackground();
+        }
 
         GeoPoint closestPoint = ray.findClosestGeoPoint(intersections);
 
@@ -50,18 +49,23 @@ public class RayTracerBasic extends RayTracer{
     }
 
     private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
+
         Vector v = ray.getDir();
         Vector n = intersection.geometry.getNormal(intersection.point);
         double nv = alignZero(n.dotProduct(v));
+
         if (nv == 0) return Color.BLACK;
-        int nShininess = intersection.geometry.getMaterial()._nShininess;
-        Double3 kd = intersection.geometry.getMaterial()._Kd;
-        Double3 ks = intersection.geometry.getMaterial()._Ks;
+        int nShininess = intersection.geometry.getMaterial().nShininess;
+
+        Double3 kd = intersection.geometry.getMaterial().kD;
+        Double3 ks = intersection.geometry.getMaterial().kS;
 
         Color color = Color.BLACK;
         for (LightSource lightSource : scene.getLights()) {
+
             Vector l = lightSource.getL(intersection.point);
             double nl = alignZero(n.dotProduct(l));
+
             if (nl * nv > 0) { // sign(nl) == sing(nv)
                 Color lightIntensity = lightSource.getIntensity(intersection.point);
                 color = color.add(calcDiffusive(kd, l, n, lightIntensity),
@@ -77,10 +81,13 @@ public class RayTracerBasic extends RayTracer{
     }
 
     private Color calcSpecular(Double3 ks, Vector l, Vector n, Vector v, double nShininess, Color lightIntensity) {
-        Vector r = l.subtract(n.scale(l.dotProduct(n)).scale(2)).normalize();
+
+       Vector r = l.subtract(n.scale(l.dotProduct(n)).scale(2)).normalize();
         double max = Math.max(0, -v.dotProduct(r));
+
         double maxNs = Math.pow(max, nShininess);
         Double3 ksMaxNs = ks.scale(maxNs);
+
         return lightIntensity.scale(ksMaxNs);
     }
 }

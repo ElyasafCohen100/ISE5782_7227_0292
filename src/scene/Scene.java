@@ -11,13 +11,16 @@ import java.util.List;
 //================== Scene class (PDS - Plain Data Structure) ==================//
 public class Scene {
 
-    List<LightSource> lightSourceList = new LinkedList<LightSource>();
+    List<LightSource> lights = new LinkedList<LightSource>();
 
-    public Scene setLightSourceList(List<LightSource> lightSourceList) {
-        this.lightSourceList = lightSourceList;
+    public Scene setLights(List<LightSource> lights) {
+        this.lights = lights;
         return this;
     }
 
+    public List<LightSource> getLights() {
+        return this.lights;
+    }
     //==== we use with design pattern called "builder pattern" ====//
 
     private final String name; // the scene's name

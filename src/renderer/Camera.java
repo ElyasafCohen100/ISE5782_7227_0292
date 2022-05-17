@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.MissingResourceException;
+
 import static primitives.Util.isZero;
 
 /**
@@ -123,17 +125,26 @@ public class Camera {
         return this;
     }
 
-    public void renderImage() {
-        if (this.imageWriter == null)
-            throw new UnsupportedOperationException("Missing imageWriter");
-        if (this.rayTracer == null)
-            throw new UnsupportedOperationException("Missing rayTracerBase");
+    public Camera renderImage() {
+        try {
+            if (this.imageWriter == null)
+                throw new MissingResourceException("Missing imageWriter", ImageWriter.class.getName(), "");
+            if (this.rayTracer == null)
+                throw new MissingResourceException("Missing rayTracerBase", RayTracer.class.getName(), "");
 
-        for (int i = 0; i < this.imageWriter.getNy(); i++) {
-            for (int j = 0; j < this.imageWriter.getNy(); j++) {
-                Color color = castRay(j,i);
-                this.imageWriter.writePixel(j, i, color);
+            int nX = this.imageWriter.getNx();
+            int nY = this.imageWriter.getNy();
+
+            for (int i = 0; i < nY; i++) {
+                for (int j = 0; j < nX; j++) {
+                    Color pixelColor = castRay(nX, nY, j, i);
+                    this.imageWriter.writePixel(j, i, pixelColor);
+                }
             }
+            return this;
+        }
+        catch (MissingResourceException e) {
+            throw new UnsupportedOperationException("No implementation" + e.getClassName());
         }
     }
 
@@ -153,12 +164,8 @@ public class Camera {
         this.imageWriter.writeToImage();
     }
 
-    private Color castRay(int j,int i){
-        Ray ray = constructRay(
-                this.imageWriter.getNx(),
-                this.imageWriter.getNy(),
-                j,
-                i);
+    private Color castRay(int nX, int nY, int j, int i) {
+        Ray ray = constructRay(nX, nY, j, i);
         return this.rayTracer.traceRay(ray);
     }
 }
