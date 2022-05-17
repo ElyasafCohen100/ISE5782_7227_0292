@@ -7,10 +7,11 @@ import primitives.Color;
  */
 abstract class Light {
 
-    protected Color intensity; //the geomerty's color intensity light
+    protected Color intensity; //the geometry's color intensity light
 
     /**
      * constructor for the intensity
+     *
      * @param color of the intensity of the source of the light
      */
     protected Light(Color color) {
@@ -19,6 +20,7 @@ abstract class Light {
 
     /**
      * get the light's intensity
+     *
      * @return the intensity
      */
     public Color getIntensity() {

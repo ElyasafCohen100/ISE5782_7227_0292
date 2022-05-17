@@ -2,12 +2,24 @@ package scene;
 
 import geometries.Geometries;
 import lighting.AmbientLight;
+import lighting.LightSource;
 import primitives.Color;
+
+import java.util.LinkedList;
+import java.util.List;
 
 //================== Scene class (PDS - Plain Data Structure) ==================//
 public class Scene {
 
+    List<LightSource> lightSourceList = new LinkedList<LightSource>();
+
+    public Scene setLightSourceList(List<LightSource> lightSourceList) {
+        this.lightSourceList = lightSourceList;
+        return this;
+    }
+
     //==== we use with design pattern called "builder pattern" ====//
+
     private final String name; // the scene's name
     private final Color background; // the background's color (black is the default)
     private final AmbientLight ambientLight; //the ambientLight - תאורה סביבתית
@@ -16,11 +28,9 @@ public class Scene {
     public String getName() {
         return name;
     }
-
     public Color getBackground() {
         return background;
     }
-
     public AmbientLight getAmbientLight() {
         return ambientLight;
     }

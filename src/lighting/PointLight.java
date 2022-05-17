@@ -2,18 +2,28 @@ package lighting;
 
 import primitives.*;
 
+//===== the PointLight class represented source light like a lamp light =====//
+
 public class PointLight extends Light implements LightSource {
 
-    private Point position; //The position point of the light source in space
+    private Point position; //The position point of the light source in the space
+
+    /**
+     * kC is The specular attenuation factor, required to ensure that the denominator in getIntensity > 1
+     * kL is The light source attenuation factor
+     * kQ is The attenuation factor of the energy coming to the point
+     * <p>
+     * the formula is: Il = I0/(Kc + Ki*d + Kq*d^2);
+     */
     private double kC = 1, kL = 0, kQ = 0; // Light factor -> constant, linear and Quadratic
 
     /**
      * constructor for the intensity
      *
-     * @param color of the intensity of the source of the light
+     * @param intensity of the intensity of the source of the light
      */
-    protected PointLight(Color color, Point position) {
-        super(color);
+    protected PointLight(Color intensity, Point position) {
+        super(intensity);
         this.position = position;
     }
 
@@ -51,6 +61,7 @@ public class PointLight extends Light implements LightSource {
 
     /**
      * setkC function
+     *
      * @param kC
      * @return
      */
@@ -61,6 +72,7 @@ public class PointLight extends Light implements LightSource {
 
     /**
      * setkL function
+     *
      * @param kL
      * @return
      */
@@ -71,6 +83,7 @@ public class PointLight extends Light implements LightSource {
 
     /**
      * setkQ function
+     *
      * @param kQ
      * @return
      */

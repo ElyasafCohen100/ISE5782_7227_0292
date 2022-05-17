@@ -4,7 +4,10 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
-public class DirectionalLight extends Light implements LightSource{
+
+//====== the class DirectionLight represent source light like the sun's light =======//
+
+public class DirectionalLight extends Light implements LightSource {
 
     private Vector direction;
 
@@ -15,7 +18,7 @@ public class DirectionalLight extends Light implements LightSource{
      */
     protected DirectionalLight(Color intensity, Vector dir) {
         super(intensity);
-        this.direction=dir.normalize();
+        this.direction = dir.normalize();
     }
 
     /**

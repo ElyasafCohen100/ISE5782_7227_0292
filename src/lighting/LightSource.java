@@ -6,6 +6,7 @@ public interface LightSource {
 
     /**
      * Get the intensity of the light at a point
+     *
      * @param p origin of the light
      * @return the intensity
      */
@@ -13,6 +14,7 @@ public interface LightSource {
 
     /**
      * Get the direction of the light from a point
+     *
      * @param p the point
      * @return the direction
      */

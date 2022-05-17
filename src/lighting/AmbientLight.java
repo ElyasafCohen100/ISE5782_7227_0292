@@ -5,7 +5,7 @@ import primitives.Double3;
 
 /**
  * Ambient Light for all object in 3D space
- *
+ * <p>
  * this class represented us the Ambient Light (תאורה סביבתית)
  */
 public class AmbientLight extends Light {

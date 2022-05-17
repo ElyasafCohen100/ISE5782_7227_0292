@@ -7,12 +7,12 @@ import primitives.Vector;
 import java.util.Objects;
 
 /**
- * an abstract class for finding     the Normal of any geometry shape
- *
+ * an abstract class for finding the Normal of any geometry shape
+ * <p>
  * As we said - because there is no necessary to implement the "getNormal" function in a complex object,
  * we separated the Geometry interface (Targil 5) into two interfaces(ISP principle).
- *(from Targil 6 on, it's becomes to be an abstract class)
- *
+ * (from Targil 6 on, it's becomes to be an abstract class)
+ * <p>
  * so here we have left the "getNormal" function to find the Normal of any geometry shape
  */
 
@@ -27,6 +27,7 @@ public abstract class Geometry extends Intersectable {
 
     /**
      * getEmission function
+     *
      * @return the geometry's color
      */
     public Color getEmission() {
@@ -35,6 +36,7 @@ public abstract class Geometry extends Intersectable {
 
     /**
      * setEmission function
+     *
      * @param emission
      * @return
      */
@@ -45,8 +47,9 @@ public abstract class Geometry extends Intersectable {
 
     /**
      * return the normal to the vector in specific point
+     *
      * @param point
-     * @return  the normal to the vector in specific point
+     * @return the normal to the vector in specific point
      */
     public abstract Vector getNormal(Point point);
 }

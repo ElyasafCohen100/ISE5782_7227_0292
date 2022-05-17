@@ -2,6 +2,8 @@ package lighting;
 
 import primitives.*;
 
+//==== the SpotLight represented source light like Spot =====//
+
 public class SpotLight extends PointLight {
 
     private Vector dir;
