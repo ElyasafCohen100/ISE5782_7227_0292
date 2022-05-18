@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import lighting.AmbientLight;
 import geometries.*;
 import primitives.*;
+import renderer.*;
 import scene.Scene;
 import static java.awt.Color.*;
 
@@ -82,7 +83,7 @@ public class RenderTests {
 	/**
 	 * Test for XML based scene - for bonus
 	 */
-//	@Test
+	//@Test
 //	public void basicRenderXml() {
 //		Scene.SceneBuilder scene = new Scene.SceneBuilder("XML Test scene");
 //

@@ -21,6 +21,7 @@ public class Scene {
     public List<LightSource> getLights() {
         return this.lights;
     }
+
     //==== we use with design pattern called "builder pattern" ====//
 
     private final String name; // the scene's name
@@ -31,15 +32,17 @@ public class Scene {
     public String getName() {
         return name;
     }
+
     public Color getBackground() {
         return background;
     }
+
     public AmbientLight getAmbientLight() {
         return ambientLight;
     }
 
     public Geometries getGeometries() {
-        if(geometries==null) return  new Geometries();
+        if (geometries == null) return new Geometries();
         return geometries;
     }
 
@@ -53,11 +56,11 @@ public class Scene {
     //================== SceneBuilder class ==================//
     public static class SceneBuilder {
         private final String name; // the scene's name
-        private Color background; // the background's color (black is the default)
-        private AmbientLight ambientLight; //the ambientLight
-        private Geometries geometries; // the 3D model
+        private Color background = Color.BLACK; // the background's color (black is the default)
+        private AmbientLight ambientLight = new AmbientLight(); //the ambientLight
+        private Geometries geometries = new Geometries(); // the 3D model
 
-        public SceneBuilder(String name){
+        public SceneBuilder(String name) {
             this.name = name;
         }
 
@@ -78,6 +81,8 @@ public class Scene {
             return this;
         }
 
-        public Scene build(){return new Scene(this);}
+        public Scene build() {
+            return new Scene(this);
+        }
     }
 }
