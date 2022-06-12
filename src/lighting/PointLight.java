@@ -27,6 +27,11 @@ public class PointLight extends Light implements LightSource {
         this.position = position;
     }
 
+    @Override
+    public double getDistance(Point point) {
+        return position.distance(point);
+    }
+
     /**
      * Calculate and return the intensity light on specific point
      *

@@ -3,14 +3,8 @@ package primitives;
 // Create a class for representation Vector
 public class Vector extends Point {
 
-    // Creating a constructor for the class Vector.
     public Vector(Double3 xyz) {
         super(xyz);
-
-        //Check if the coordinates create ZERO vector.
-        if (this.xyz.equals(Double3.ZERO)) {
-            throw new IllegalArgumentException("ZERO vector not allowed");
-        }
     }
 
     // Creating a constructor for the class Vector.

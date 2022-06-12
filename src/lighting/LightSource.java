@@ -4,6 +4,7 @@ import primitives.*;
 
 public interface LightSource {
 
+    double getDistance(Point point);
     /**
      * Get the intensity of the light at a point
      *

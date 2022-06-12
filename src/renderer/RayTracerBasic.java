@@ -6,15 +6,16 @@ import primitives.*;
 import scene.Scene;
 
 import java.util.List;
+
 import static primitives.Util.alignZero;
 
 public class RayTracerBasic extends RayTracer {
 
-    private static final double DELTA = 0.1;
-
     public RayTracerBasic(Scene scene) {
         super(scene);
     }
+
+    private static final double DELTA = 0.1;
 
     /**
      * Get color of the intersection of the ray with the scene
@@ -48,46 +49,67 @@ public class RayTracerBasic extends RayTracer {
                 .add(calcLocalEffects(point, ray));
     }
 
-    private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
+    private boolean unshaded(GeoPoint gp, Vector lightRay, Vector n, LightSource lightSource) {
+        Point point = gp.point.add( n.scale(DELTA));
+        //TODO: deviation of point from geometry
+        Ray rayToLight = new Ray(point, lightRay.scale(-1)); // the ray from the point to the light source
 
-        Vector v = ray.getDir();
-        Vector n = intersection.geometry.getNormal(intersection.point);
-        double nv = alignZero(n.dotProduct(v));
-
-        if (nv == 0) return Color.BLACK;
-        int nShininess = intersection.geometry.getMaterial().nShininess;
-
-        Double3 kd = intersection.geometry.getMaterial().kD;
-        Double3 ks = intersection.geometry.getMaterial().kS;
-
-        Color color = Color.BLACK;
-        for (LightSource lightSource : scene.getLights()) {
-
-            Vector l = lightSource.getL(intersection.point);
-            double nl = alignZero(n.dotProduct(l));
-
-            if (nl * nv > 0) { // sign(nl) == sing(nv)
-                Color lightIntensity = lightSource.getIntensity(intersection.point);
-                color = color.add(calcDiffusive(kd, l, n, lightIntensity),
-                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+        //=== check if there is an intersection point with that ray ===//
+        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(rayToLight);
+        if (intersections != null) {
+            for (var item : intersections) {
+                if (lightSource.getDistance(gp.point) < lightSource.getDistance(item.point)) {
+                    return false;
+                }
             }
         }
-        return color;
+        return true;
     }
 
-    private Color calcDiffusive(Double3 kd, Vector l, Vector n, Color lightIntensity) {
-        double lN = l.normalize().dotProduct(n.normalize());
-        return lightIntensity.scale(kd.scale(Math.abs(lN)));
+        private Color calcLocalEffects (GeoPoint intersection, Ray ray){
+
+            Vector v = ray.getDir();
+            Vector n = intersection.geometry.getNormal(intersection.point);
+            double nv = alignZero(n.dotProduct(v));
+
+            if (nv == 0)
+                return Color.BLACK;
+            int nShininess = intersection.geometry.getMaterial().nShininess;
+
+            Double3 kd = intersection.geometry.getMaterial().kD;
+            Double3 ks = intersection.geometry.getMaterial().kS;
+
+            Color color = Color.BLACK;
+            for (LightSource lightSource : scene.getLights()) {
+
+                Vector l = lightSource.getL(intersection.point);
+                double nl = alignZero(n.dotProduct(l));
+
+                if (nl * nv > 0) { // sign(nl) == sign(nv)
+                    if (unshaded(intersection, l, n, lightSource)) {
+                        Color lightIntensity = lightSource.getIntensity(intersection.point);
+                        color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                                calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                    } else
+                        color = color.add(Color.BLACK); //todo  add background color
+                }
+            }
+            return color;
+        }
+
+        private Color calcDiffusive (Double3 kd, Vector l, Vector n, Color lightIntensity){
+            double lN = l.normalize().dotProduct(n.normalize());
+            return lightIntensity.scale(kd.scale(Math.abs(lN)));
+        }
+
+        private Color calcSpecular (Double3 ks, Vector l, Vector n, Vector v,double nShininess, Color lightIntensity){
+
+            Vector r = l.subtract(n.scale(l.dotProduct(n)).scale(2)).normalize();
+            double max = Math.max(0, -v.dotProduct(r));
+
+            double maxNs = Math.pow(max, nShininess);
+            Double3 ksMaxNs = ks.scale(maxNs);
+
+            return lightIntensity.scale(ksMaxNs);
+        }
     }
-
-    private Color calcSpecular(Double3 ks, Vector l, Vector n, Vector v, double nShininess, Color lightIntensity) {
-
-       Vector r = l.subtract(n.scale(l.dotProduct(n)).scale(2)).normalize();
-        double max = Math.max(0, -v.dotProduct(r));
-
-        double maxNs = Math.pow(max, nShininess);
-        Double3 ksMaxNs = ks.scale(maxNs);
-
-        return lightIntensity.scale(ksMaxNs);
-    }
-}

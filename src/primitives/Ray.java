@@ -11,6 +11,7 @@ import static primitives.Util.isZero;
 //Opening a Class for representation Ray in the space (3D)//
 public class Ray {
 
+    private static final double DELTA = 0.1;
     private final Point p0;
     private final Vector dir;
 
@@ -18,6 +19,19 @@ public class Ray {
     public Ray(Point p0, Vector dir) {
         this.p0 = p0;
         this.dir = dir.normalize();
+    }
+
+    /**
+     * Constructor to initialize ray
+     *
+     * @param p0  point of the ray
+     * @param n   normal vector
+     * @param dir direction vector of the ray
+     */
+    public Ray(Point p0, Vector dir, Vector n) {
+        double delta = dir.dotProduct(n) >= 0 ? DELTA : -DELTA;
+        this.p0 = p0.add(n.scale(delta));
+        this.dir = dir;
     }
 
     //Getters
@@ -57,12 +71,18 @@ public class Ray {
      * @return new {@link Point}
      */
     public Point getPoint(double t) {
-        if (isZero(t)) {
-            throw new IllegalArgumentException("t is equal to 0 produce an illegal ZERO vector");
-        }
+//        if (isZero(t)) {
+//            throw new IllegalArgumentException("t is equal to 0 produce an illegal ZERO vector");
+//        }
         return this.p0.add(this.dir.scale(t));
     }
 
+    /**
+     * Return the closest point from all intersection points
+     *
+     * @param points list of intersections
+     * @return {@link Point}
+     */
     public Point findClosestPoint(List<Point> points) {
         return points == null || points.isEmpty() ? null
                 : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
@@ -75,6 +95,10 @@ public class Ray {
      * @return {@link GeoPoint}
      */
     public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPointList) {
+
+        if (geoPointList == null) {
+            return null;
+        }
 
         GeoPoint closestPoint = null;
         double minDistance = Double.MAX_VALUE;

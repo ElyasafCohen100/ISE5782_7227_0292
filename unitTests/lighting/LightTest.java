@@ -226,12 +226,6 @@ public class LightTest {
         scene2.getLights()
                 .add(new DirectionalLight(new Color(120, 5, 5), new Vector(0, 0, -1)));
 
-
-
-
-
-
-
         //=== another spotlight for our new sphere ===//
         scene2.getLights()
                 .add(new SpotLight(new Color(400,250,800), new Point(2.5,6.3,7.5),new Vector(2.6,4.8,6.3)));

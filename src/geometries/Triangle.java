@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static primitives.Util.isZero;
 import static primitives.Util.alignZero;
 
-public class Triangle extends Polygon {
+public class Triangle extends Polygon implements FlatGeometry {
 
     /**
      * Constructor to initialize triangle

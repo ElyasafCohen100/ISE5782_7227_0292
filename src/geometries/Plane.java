@@ -11,7 +11,7 @@ import static primitives.Util.*;
  * A plane is a flat surface that extends infinitely in all directions
  */
 
-public class Plane extends Geometry {
+public class Plane extends Geometry implements FlatGeometry {
     final Point q0; // a random point on the plane
     final Vector normal; // a normal vector to the plane
 
