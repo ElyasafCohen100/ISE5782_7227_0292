@@ -12,7 +12,50 @@ public class Material {
     // the shininess factor of the object material type//
     public int nShininess = 0;
 
+    public Double3 kT =new Double3(0,0,0); // the factor of transparency (מקדם שקיפות)
+    public Double3 kR = new Double3(0,0,0); // the factor of reflection (מקדם השתקפות)
+
     /**
+     * set kT function - the transparency factor (Double3)
+     * @param kT
+     * @return
+     */
+    public Material setkT(Double3 kT) {
+        this.kT = kT;
+        return this;
+    }
+
+    /**
+     * set kT function - the transparency factor (double)
+     * @param kT
+     * @return
+     */
+    public Material setkT(double kT) {
+        this.kT = new Double3(kT);
+        return this;
+    }
+
+    /**
+     * set kR function - the reflection factor (Double3)
+     * @param kR
+     * @return
+     */
+    public Material setkR(Double3 kR) {
+        this.kR = kR;
+        return this;
+    }
+
+    /**
+     * set kR function - the reflection factor (double)
+     * @param kR
+     * @return
+     */
+    public Material setkR(double kR) {
+        this.kR = new Double3(kR);
+        return this;
+    }
+
+    /**,
      * set KD function - the diffuse light factor
      *
      * @param kD light factor (Double3)
@@ -45,14 +88,13 @@ public class Material {
         return this;
     }
 
-
     /**
      * set kS function the specular light factor
      *
      * @param kS light factor (double)
      * @return
      */
-    public Material setkS(Double kS) {
+    public Material setkS(double kS) {
         this.kS = new Double3(kS);
         return this;
     }

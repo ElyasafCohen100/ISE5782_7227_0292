@@ -26,7 +26,7 @@ public class Scene {
 
     private final String name; // the scene's name
     private final Color background; // the background's color (black is the default)
-    private final AmbientLight ambientLight; //the ambientLight - תאורה סביבתית
+    private AmbientLight ambientLight; //the ambientLight - תאורה סביבתית
     private final Geometries geometries; // the 3D model
 
     public String getName() {
@@ -51,6 +51,13 @@ public class Scene {
         this.background = builder.background;
         this.ambientLight = builder.ambientLight;
         this.geometries = builder.geometries;
+    }
+
+
+    //====== לברר על התוספת הזאת עם יקיר ==========
+    public Scene setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+        return this;
     }
 
     //================== SceneBuilder class ==================//

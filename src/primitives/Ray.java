@@ -8,14 +8,19 @@ import java.util.Objects;
 
 import static primitives.Util.isZero;
 
-//Opening a Class for representation Ray in the space (3D)//
+//==== Opening a Class for representation Ray in the space (3D)====//
 public class Ray {
 
     private static final double DELTA = 0.1;
     private final Point p0;
     private final Vector dir;
 
-    // Creating a constructor for the class Ray.
+    /**
+     * Constructor for initialize ray
+     *
+     * @param p0  the ray's point
+     * @param dir the ray's direction vector
+     */
     public Ray(Point p0, Vector dir) {
         this.p0 = p0;
         this.dir = dir.normalize();
@@ -71,9 +76,9 @@ public class Ray {
      * @return new {@link Point}
      */
     public Point getPoint(double t) {
-//        if (isZero(t)) {
-//            throw new IllegalArgumentException("t is equal to 0 produce an illegal ZERO vector");
-//        }
+        if (isZero(t)) {
+            throw new IllegalArgumentException("t is equal to 0 produce an illegal ZERO vector");
+        }
         return this.p0.add(this.dir.scale(t));
     }
 
