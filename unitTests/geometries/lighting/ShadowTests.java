@@ -1,5 +1,7 @@
-package lighting;
+package geometries.lighting;
 
+import lighting.AmbientLight;
+import lighting.SpotLight;
 import org.junit.jupiter.api.Test;
 import static java.awt.Color.*;
 
