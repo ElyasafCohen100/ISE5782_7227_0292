@@ -29,7 +29,7 @@ public class DirectionalLight extends Light implements LightSource {
     /**
      * Return the intensity light on specific point
      *
-     * @param p the point on the object (Point3D)
+     * @param p the point on the object (Point)
      * @return the intensity (Color)
      */
     @Override
